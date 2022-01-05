@@ -92,8 +92,8 @@ function computeStoreDx(d, context) {
   return dx;
 }
 
-function defaultSort(a, b){
-   return b.value - a.value;
+function defaultSort(a, b) {
+  return b.value - a.value;
 }
 
 const useNameForColor = d => d.name;
@@ -218,7 +218,7 @@ export default {
     sort: {
       type: Function,
       required: false,
-      default: defaultSort,
+      default: defaultSort
     },
     /**
      *  If true disable sort on the level-1 nodes.
@@ -226,7 +226,7 @@ export default {
     disableSort: {
       type: Boolean,
       required: false,
-      default: false,
+      default: false
     }
   },
 
@@ -436,7 +436,7 @@ export default {
 
       if (!onlyRedraw) {
         this.root = hierarchy(data).sum(d => d.size);
-        if(!this.disableSort) this.root = this.root.sort(this.sort);
+        if (!this.disableSort) this.root = this.root.sort(this.sort);
 
         this.nodes = partition()(this.root).descendants();
 
