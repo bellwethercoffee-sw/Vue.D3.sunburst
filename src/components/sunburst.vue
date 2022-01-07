@@ -79,7 +79,7 @@ function arc2Tween(arcSunburst, d, indx) {
 }
 
 function getDx({ textAngle, currentDx }) {
-  if (textAngle <= 180) {
+  if (textAngle < 180) {
     return 5;
   }
   return !!currentDx && currentDx < -5 ? currentDx : -5;
