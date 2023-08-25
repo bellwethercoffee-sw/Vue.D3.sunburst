@@ -3,7 +3,7 @@
 **THIS IS A MODIFIED VERSION OF THE ORIGINAL [REPO](https://www.npmjs.com/package/vue-d3-sunburst) TO ALLOW FOR CUSTOM SORTING OF THE DATA.**
 
 ```bash
-npm install bellwethercoffee-vue-d3-sunburst --save
+npm install bellwethercoffee-vue-d3-sunburst@2.0.0-beta1 --save
 ```
 
 ---
@@ -45,7 +45,7 @@ Components providing standard and reusable features are provided.
 ## Install
 
 ```
-npm i vue-d3-sunburst
+npm install bellwethercoffee-vue-d3-sunburst --save
 ```
 
 ## Usage
@@ -451,7 +451,7 @@ Renderless component displaying arc pop-up on mouse over.
 ## Installation
 
 ```
-npm install vue-d3-sunburst
+npm install bellwethercoffee-vue-d3-sunburst
 ```
 
 ## Project setup
@@ -463,29 +463,11 @@ npm install
 ### Compiles and hot-reloads for development
 
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
+npm run dev
 ```
 
 ### Run your unit tests
 
 ```
-npm run test:unit
-```
-
-### Update the API section of README.md with generated documentation
-
-```
-npm run doc:build
+npm run test:e2e:dev
 ```
