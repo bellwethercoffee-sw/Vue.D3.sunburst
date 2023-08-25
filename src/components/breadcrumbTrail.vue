@@ -15,7 +15,7 @@
   />
 </template>
 <script>
-import breadcrumb from "./breadcrumb";
+import breadcrumb from "./breadcrumb.vue";
 
 /**
  * Breadcrumb trail component displaying path between root node and current node.

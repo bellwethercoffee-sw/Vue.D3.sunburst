@@ -1,3 +1,70 @@
+<script>
+import sunburst from "./components/sunburst.vue";
+import nodeInfoDisplayer from "./components/nodeInfoDisplayer.vue";
+import breadcrumbTrail from "./components/breadcrumbTrail.vue";
+// behaviors
+import highlightOnHover from "./components/behavior/highlightOnHover.js";
+import zoomOnClick from "./components/behavior/zoomOnClick.js";
+import popUpOnHover from "./components/behavior/popUpOnHover.js";
+
+import { colorSchemes } from "./infra/colorSchemes.js";
+import data from "../data/data";
+import { scaleOrdinal } from "d3-scale";
+
+const colorSchemesNames = Object.keys(colorSchemes).map(key => ({
+  value: key,
+  text: colorSchemes[key].name
+}));
+
+export default {
+  name: "app",
+  setup() {
+    return {
+      data,
+      minAngleDisplayed: 0.01,
+      colorScheme: colorSchemesNames[0].value,
+      colorSchemes: colorSchemesNames,
+      inAnimationDuration: 100,
+      outAnimationDuration: 1000,
+      overrideColorScale: false,
+      centralCircleRelativeSize: 25,
+      showLabels: false,
+      custoColorScale: scaleOrdinal([
+        "#e39b89",
+        "#31ea74",
+        "#3c7227",
+        "#9dad1f"
+      ])
+    };
+  },
+  computed: {
+    colorScale() {
+      return this.overrideColorScale ? this.custoColorScale : null;
+    }
+  },
+  methods: {
+    showLabelsFunction(d) {
+      const {
+        data,
+        context: { angle, relativeDepth }
+      } = d;
+      if (relativeDepth > 2 || angle < 5) {
+        return null;
+      }
+      return data.name;
+    }
+  },
+  components: {
+    sunburst,
+    nodeInfoDisplayer,
+    breadcrumbTrail,
+    highlightOnHover,
+    zoomOnClick,
+    popUpOnHover
+  }
+};
+</script>
+
 <template>
   <div id="app" class="container-fluid">
     <div class="row main-row">
@@ -150,30 +217,30 @@
               :inAnimationDuration="inAnimationDuration"
               :outAnimationDuration="outAnimationDuration"
             >
-              <breadcrumbTrail
-                slot="legend"
-                slot-scope="{ nodes, colorGetter, width }"
-                :current="nodes.mouseOver"
-                :root="nodes.root"
-                :colorGetter="colorGetter"
-                :from="nodes.zoomed"
-                :width="width"
-              />
+              <template #legend="{ nodes, colorGetter, width }">
+                <breadcrumbTrail
+                  :current="nodes.mouseOver"
+                  :root="nodes.root"
+                  :colorGetter="colorGetter"
+                  :from="nodes.zoomed"
+                  :width="width"
+                />
+              </template>
 
-              <nodeInfoDisplayer
-                slot="top"
-                slot-scope="{ nodes }"
-                :current="nodes.mouseOver"
-                :root="nodes.root"
-                :clicked="nodes.clicked"
-                description="of selected"
-              />
+              <template #top="{ nodes }">
+                <nodeInfoDisplayer
+                  :current="nodes.mouseOver"
+                  :root="nodes.root"
+                  :clicked="nodes.clicked"
+                  description="of selected"
+                />
+              </template>
 
-              <template slot="pop-up" slot-scope="{ data }">
+              <template #pop-up="{ data }">
                 <div class="pop-up">{{data.name}}</div>
               </template>
 
-              <template slot-scope="{ on, actions }">
+              <template v-slot="{ on, actions }">
                 <highlightOnHover v-bind="{ on, actions }" />
                 <zoomOnClick v-bind="{ on, actions }" />
                 <popUpOnHover  v-bind="{ on, actions }"/>
@@ -186,128 +253,8 @@
   </div>
 </template>
 
-<script>
-import $ from "jquery";
-import "jquery-ui/ui/widgets/resizable.js";
-
-import sunburst from "@/components/sunburst";
-import nodeInfoDisplayer from "@/components/nodeInfoDisplayer";
-import breadcrumbTrail from "@/components/breadcrumbTrail";
-//behaviours
-import highlightOnHover from "@/components/behavior/highlightOnHover";
-import zoomOnClick from "@/components/behavior/zoomOnClick";
-import popUpOnHover from "@/components/behavior/popUpOnHover";
-
-import { colorSchemes } from "@/infra/colorSchemes";
-import data from "../data/data";
-import { scaleOrdinal } from "d3-scale";
-
-const colorSchemesNames = Object.keys(colorSchemes).map(key => ({
-  value: key,
-  text: colorSchemes[key].name
-}));
-
-export default {
-  name: "app",
-  data() {
-    return {
-      data,
-      minAngleDisplayed: 0.01,
-      colorScheme: colorSchemesNames[0].value,
-      colorSchemes: colorSchemesNames,
-      inAnimationDuration: 100,
-      outAnimationDuration: 1000,
-      overrideColorScale: false,
-      centralCircleRelativeSize: 25,
-      showLabels: false,
-      custoColorScale: scaleOrdinal([
-        "#e39b89",
-        "#31ea74",
-        "#3c7227",
-        "#9dad1f"
-      ])
-    };
-  },
-  computed: {
-    colorScale() {
-      return this.overrideColorScale ? this.custoColorScale : null;
-    }
-  },
-  methods: {
-    showLabelsFunction(d) {
-      const {
-        data,
-        context: { angle, relativeDepth }
-      } = d;
-      if (relativeDepth > 2 || angle < 5) {
-        return null;
-      }
-      return data.name;
-    }
-  },
-  mounted() {
-    $("#resizable").resizable({
-      containment: "parent"
-    });
-  },
-  components: {
-    sunburst,
-    nodeInfoDisplayer,
-    breadcrumbTrail,
-    highlightOnHover,
-    zoomOnClick,
-    popUpOnHover
-  }
-};
-</script>
-
 <style lang="less">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-
-  height: 800px;
-
-  .pop-up {
-    background-color: white;
-    border: black;
-    pointer-events: none;
-    opacity: 0.92;
+  main {
+    height: 100vh;
   }
-
-  .main-row {
-    height: 800px;
-  }
-
-  .control-middle {
-    height: 600px;
-  }
-
-  .resizable {
-    margin-left: calc(50% - 50px);
-  }
-
-  .father {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .sunburst {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-  .custo-checkbox {
-    display: flex;
-    justify-content: space-between;
-  }
-}
 </style>

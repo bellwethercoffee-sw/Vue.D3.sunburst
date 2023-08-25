@@ -9,10 +9,8 @@
       :actions="actions"
     >
     </slot>
-
     <div class="viewport" v-resize.throttle.250="resize">
-
-      <div class="pop-up-tree"  :style="popUpStyle">
+      <div class="pop-up-tree" :style="popUpStyle">
         <!-- Use this slot as an arc pop-up-->
         <slot v-if="popUpNode"
           name="pop-up"
@@ -22,7 +20,6 @@
         >
         </slot>
       </div>
-
       <!-- Use this slot to add information on top of the graph -->
       <slot
         name="top"
@@ -31,13 +28,14 @@
         :actions="actions"
       >
       </slot>
-
       <!-- Use this slot to add behaviors to the sunburst -->
       <slot :on="on" :actions="actions"> </slot>
     </div>
   </div>
 </template>
+
 <script>
+import eventBus from './behavior/eventBus';
 import resize from "vue-resize-directive";
 import { select } from "d3-selection";
 import { scaleLinear, scaleSqrt } from "d3-scale";
@@ -306,6 +304,7 @@ export default {
        * Fired when mouse leaves the sunburst node.
        */
       this.$emit("mouseLeave");
+      eventBus.$emit("mouseLeave");
       this.graphNodes.mouseOver = null;
     });
 
@@ -546,6 +545,7 @@ export default {
        * @param {Object} value - {node, sunburst} The corresponding node and sunburst component
        */
       this.$emit("rootChanged", { node: rootNode, sunburst: this });
+      eventBus.$emit("rootChanged", { node: rootNode, sunburst: this });
     },
 
     /**
@@ -661,6 +661,7 @@ export default {
        * @param {Object} value - {node, sunburst} The corresponding node and sunburst component
        */
       this.$emit("mouseOverNode", { node, center, sunburst: this });
+      eventBus.$emit("mouseOverNode", { node, center, sunburst: this });
     },
 
     /**
@@ -673,6 +674,7 @@ export default {
        * @param {Object} value - {node, sunburst} The corresponding node and sunburst component
        */
       this.$emit("clickNode", { node: value, sunburst: this });
+      eventBus.$emit("clickNode", { node: value, sunburst: this });
     },
 
     /**
@@ -730,6 +732,7 @@ export default {
        * @param {Object} value - {node, sunburst} The corresponding zoomed node and sunburst component
        */
       this.$emit("zoomedChanged", { node, sunburst: this });
+      eventBus.$emit("zoomedChanged", { node, sunburst: this });
 
       const descendants = node.descendants();
       const textNodes = this.vis.selectAll("text");
@@ -865,6 +868,7 @@ export default {
        * @param {Object} value - {node, sunburst} The corresponding node and sunburst component
        */
       this.$emit("highlightedChanged", { node, sunburst: this });
+      eventBus.$emit("highlightedChanged", { node, sunburst: this });
     },
 
     /**
@@ -919,7 +923,7 @@ export default {
      * @private
      */
     on() {
-      return this.$on.bind(this);
+      return eventBus.$on;
     },
 
     /**
@@ -1026,6 +1030,7 @@ export default {
        * @param {Object} value - {radius, height, width} Size information in pixel
        */
       this.$emit("resize", { radius, height, width });
+      eventBus.$emit("resize", { radius, height, width });
     }
   }
 };

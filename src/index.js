@@ -10,9 +10,12 @@ import popUpOnHover from "./components/behavior/popUpOnHover";
 
 import { colorSchemes } from "./infra/colorSchemes";
 
+import eventBus from "./components/behavior/eventBus";
+
 export {
   breadcrumbTrail,
   colorSchemes,
+  eventBus,
   highlightOnHover,
   popUpOnHover,
   nodeInfoDisplayer,
