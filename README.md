@@ -2,6 +2,10 @@
 
 **THIS IS A MODIFIED VERSION OF THE ORIGINAL [REPO](https://www.npmjs.com/package/vue-d3-sunburst) TO ALLOW FOR CUSTOM SORTING OF THE DATA.**
 
+| Vue | Support |
+| --- | --- |
+| 3.x | [x] |
+
 ```bash
 npm install bellwethercoffee-vue-d3-sunburst@2.0.0-beta1 --save
 ```
