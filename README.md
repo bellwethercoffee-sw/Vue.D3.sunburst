@@ -1,5 +1,8 @@
 # Vue.D3.Sunburst
 
+[![Npm version](https://img.shields.io/npm/v/vue-d3-sunburst.svg?maxAge=2)](https://www.npmjs.com/package/bellwethercoffee-vue-d3-sunburst)
+[![MIT License](https://img.shields.io/github/license/David-Desmaisons/Vue.D3.sunburst.svg)](https://github.com/David-Desmaisons/Vue.D3.sunburst/blob/master/LICENSE)
+
 **THIS IS A MODIFIED VERSION OF THE ORIGINAL [REPO](https://www.npmjs.com/package/vue-d3-sunburst) TO ALLOW FOR CUSTOM SORTING OF THE DATA.**
 
 | Vue | Support |
@@ -12,11 +15,7 @@ npm install bellwethercoffee-vue-d3-sunburst@2.0.0-beta1 --save
 
 ---
 
-Repos's original readme:
-
-[![GitHub open issues](https://img.shields.io/github/issues/bellwethercoffee-sw/Vue.D3.sunburst.svg?maxAge=30)](https://github.com/bellwethercoffee-sw/Vue.D3.sunburst/issues)
-[![Npm version](https://img.shields.io/npm/v/vue-d3-sunburst.svg?maxAge=2)](https://www.npmjs.com/package/bellwethercoffee-vue-d3-sunburst)
-[![MIT License](https://img.shields.io/github/license/David-Desmaisons/Vue.D3.sunburst.svg)](https://github.com/David-Desmaisons/Vue.D3.sunburst/blob/master/LICENSE)
+## Repos's original readme:
 
 ![demo gif](./img/sunburst.gif)
 
