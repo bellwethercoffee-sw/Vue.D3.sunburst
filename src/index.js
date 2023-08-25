@@ -1,16 +1,16 @@
-import sunburst from "./components/sunburst";
+import sunburst from "./components/sunburst.vue";
 
 //slots info
-import nodeInfoDisplayer from "./components/nodeInfoDisplayer";
-import breadcrumbTrail from "./components/breadcrumbTrail";
+import nodeInfoDisplayer from "./components/nodeInfoDisplayer.vue";
+import breadcrumbTrail from "./components/breadcrumbTrail.vue";
 //slots behaviors
-import highlightOnHover from "./components/behavior/highlightOnHover";
-import zoomOnClick from "./components/behavior/zoomOnClick";
-import popUpOnHover from "./components/behavior/popUpOnHover";
+import highlightOnHover from "./components/behavior/highlightOnHover.js";
+import zoomOnClick from "./components/behavior/zoomOnClick.js";
+import popUpOnHover from "./components/behavior/popUpOnHover.js";
 
-import { colorSchemes } from "./infra/colorSchemes";
+import { colorSchemes } from "./infra/colorSchemes.js";
 
-import eventBus from "./components/behavior/eventBus";
+import eventBus from "./components/behavior/eventBus.js";
 
 export {
   breadcrumbTrail,
