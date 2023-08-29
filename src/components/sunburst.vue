@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import eventBus from './behavior/eventBus';
+import eventBus from '../tinyemitter/eventBus';
 import resize from "vue-resize-directive";
 import { select } from "d3-selection";
 import { scaleLinear, scaleSqrt } from "d3-scale";

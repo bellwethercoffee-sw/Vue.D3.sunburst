@@ -10,11 +10,13 @@ import popUpOnHover from "./components/behavior/popUpOnHover.js";
 
 import { colorSchemes } from "./infra/colorSchemes.js";
 
-import eventBus from "./components/behavior/eventBus.js";
+import Emitter from "./tinyemitter/Emitter.js";
+import eventBus from "./tinyemitter/eventBus.js";
 
 export {
   breadcrumbTrail,
   colorSchemes,
+  Emitter,
   eventBus,
   highlightOnHover,
   popUpOnHover,
