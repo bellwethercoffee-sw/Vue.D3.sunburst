@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import eventBus from '../tinyemitter/eventBus';
-import resize from "vue-resize-directive";
+import eventBus from "../tinyemitter/eventBus";
+import resize from "../resize/Vueresize.js";
 import { select } from "d3-selection";
 import { scaleLinear, scaleSqrt } from "d3-scale";
 import { hierarchy, partition } from "d3-hierarchy";
