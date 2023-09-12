@@ -100,12 +100,6 @@ const miminalRadius = 20;
 export default {
   name: "sunburst",
 
-  inject: {
-    defaultSchemeColor: {
-      default: Object.keys(colorSchemes)[0]
-    }
-  },
-
   props: {
     /**
      * Sunburst data where children property is a array containing children.
@@ -121,7 +115,7 @@ export default {
       type: String,
       required: false,
       default() {
-        return this.defaultSchemeColor;
+        return 'schemeAccent';
       },
       validator: value => Object.keys(colorSchemes).indexOf(value) !== -1
     },
@@ -930,7 +924,7 @@ export default {
      * @private
      */
     colorGetter() {
-      const colorScale =
+      let colorScale =
         this.colorScale || colorSchemes[this.colorScheme].scale;
       return d => colorScale(this.getCategoryForColor(d));
     },

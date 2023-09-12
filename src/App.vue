@@ -18,7 +18,7 @@ const colorSchemesNames = Object.keys(colorSchemes).map(key => ({
 
 export default {
   name: "app",
-  setup() {
+  data() {
     return {
       data,
       minAngleDisplayed: 0.01,
