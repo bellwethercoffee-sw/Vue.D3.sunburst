@@ -1,4 +1,4 @@
-import { debounce } from 'lodash/debounce.js'
+import { debounce } from "lodash";
 import('./findPolyfill');
 import('intersection-observer');
 import('resize-sensor');
